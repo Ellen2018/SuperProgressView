@@ -27,6 +27,7 @@ public class ProgressView extends RelativeLayout {
     private int currentProgress = 70;
     private int textColor = 0xffffff;
     private OnClickListener onClickListener;
+    private String textContent;
 
     public ProgressView(Context context) {
         super(context);
@@ -118,4 +119,11 @@ public class ProgressView extends RelativeLayout {
         setProgressDrawable();
         progressBar.setProgress(currentProgress);
     }
+
+    public void setText(String text){
+        this.textContent = text;
+        textView.setText(text);
+    }
+
+    public int getCurrentProgress(){return currentProgress;}
 }

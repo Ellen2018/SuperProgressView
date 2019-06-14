@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         progressView = findViewById(R.id.button_progress_green);
+        progressView.setText("0");
         progressView.setOnClickListener(new ProgressView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressView.setMaxProgress(200);
             }
         });
         findViewById(R.id.bt_add).setOnClickListener(new View.OnClickListener() {
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 p = p + 10;
                progressView.setCurrentProgress(p);
+               progressView.setText(progressView.getCurrentProgress()+"");
             }
         });
 

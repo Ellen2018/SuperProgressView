@@ -16,7 +16,7 @@
         app:maxProgress="100"
         app:progress="90"
         app:text_color="#ffffff"
-        app:progress_color="#3e3e3e"
+        app:progress_color="#D02090"
         app:bg_color="@color/colorGray" />
 
     <Button
