@@ -27,7 +27,6 @@ public class ProgressView extends RelativeLayout {
     private int currentProgress = 70;
     private int textColor = 0xffffff;
     private OnClickListener onClickListener;
-    private Handler handler = new Handler();
 
     public ProgressView(Context context) {
         super(context);

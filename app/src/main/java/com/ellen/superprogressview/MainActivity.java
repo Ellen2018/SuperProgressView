@@ -22,9 +22,7 @@ public class MainActivity extends AppCompatActivity {
         progressView.setOnClickListener(new ProgressView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"点击了",Toast.LENGTH_SHORT).show();
                 progressView.setMaxProgress(200);
-                progressView.setProgressColor(Color.RED);
             }
         });
         findViewById(R.id.bt_add).setOnClickListener(new View.OnClickListener() {
