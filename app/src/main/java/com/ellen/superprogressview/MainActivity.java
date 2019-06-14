@@ -1,5 +1,6 @@
 package com.ellen.superprogressview;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,"点击了",Toast.LENGTH_SHORT).show();
+                progressView.setMaxProgress(200);
+                progressView.setProgressColor(Color.RED);
             }
         });
         findViewById(R.id.bt_add).setOnClickListener(new View.OnClickListener() {
@@ -31,5 +34,6 @@ public class MainActivity extends AppCompatActivity {
                progressView.setCurrentProgress(p);
             }
         });
+
     }
 }

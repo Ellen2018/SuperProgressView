@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,7 @@ public class ProgressView extends RelativeLayout {
     private int currentProgress = 70;
     private int textColor = 0xffffff;
     private OnClickListener onClickListener;
+    private Handler handler = new Handler();
 
     public ProgressView(Context context) {
         super(context);
@@ -90,6 +93,7 @@ public class ProgressView extends RelativeLayout {
         gradientDrawable1.setCornerRadius(radius);
         ClipDrawable clipDrawable = new ClipDrawable(gradientDrawable1, Gravity.LEFT,ClipDrawable.HORIZONTAL);
         progressBar.setProgressDrawable(clipDrawable);
+        progressBar.setProgress(currentProgress);
     }
 
     public void setCurrentProgress(int currentProgress) {
@@ -103,5 +107,16 @@ public class ProgressView extends RelativeLayout {
 
     public void setOnClickListener(OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
+    }
+
+    public void setMaxProgress(int maxProgress) {
+        this.maxProgress = maxProgress;
+        progressBar.setMax(maxProgress);
+    }
+
+    public void setProgressColor(int color){
+        this.progressColor = color;
+        setProgressDrawable();
+        progressBar.setProgress(currentProgress);
     }
 }

@@ -12,7 +12,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="4dp"
         android:textAllCaps="false"
-        app:radius="10dp"
+        app:radius="90dp"
         app:maxProgress="100"
         app:progress="90"
         app:text_color="#ffffff"
