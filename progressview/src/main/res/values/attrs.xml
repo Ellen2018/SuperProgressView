@@ -6,7 +6,9 @@
     <attr name="progress_color" format="color" />
     <attr name="maxProgress" format="integer" />
     <attr name="progress" format="integer" />
-    <attr name="text_color" format="color"></attr>
+    <attr name="text_color" format="color"/>
+    <attr name="text" format="string"/>
+    <attr name="text_size" format="dimension"/>
     <declare-styleable name="ProgressView">
         <attr name="bg_color" />
         <attr name="radius" />
@@ -14,5 +16,7 @@
         <attr name="maxProgress" />
         <attr name="progress" />
         <attr name="text_color"/>
+        <attr name="text"/>
+        <attr name="text_size"/>
     </declare-styleable>
 </resources>

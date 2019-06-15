@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <View
-        android:id="@+id/view_background"
+    <RelativeLayout
+        android:id="@+id/relative_layout"
         android:layout_width="match_parent"
-        android:background="@drawable/view_bg"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/view_progress_color"
-        android:layout_width="match_parent"
-        android:background="@drawable/view_bg"
-        android:visibility="gone"
-        android:layout_height="match_parent"/>
+        <View
+            android:id="@+id/view_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/view_bg" />
 
-    <ProgressBar
-        android:id="@+id/progress_horizontal"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:max="100"
-        android:progress="0"
-        android:progressDrawable="@drawable/progress_bg" />
+        <View
+            android:id="@+id/view_progress_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/view_bg"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progress_horizontal"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_bg" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="#00ffffff"
-        android:textColor="#ffffff"
-        android:text="测试"
         android:gravity="center"
-        android:layout_height="match_parent" />
+        android:text="测试"
+        android:textColor="#ffffff" />
 
 
 </RelativeLayout>

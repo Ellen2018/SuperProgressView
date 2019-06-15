@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +26,9 @@ public class ProgressView extends RelativeLayout {
     private int textColor = 0xffffff;
     private OnClickListener onClickListener;
     private String textContent;
+    private float textSize = 10f;
+    private RelativeLayout relativeLayout;
+    private boolean isInit = false;
 
     public ProgressView(Context context) {
         super(context);
@@ -58,6 +59,12 @@ public class ProgressView extends RelativeLayout {
             }else if (attr == R.styleable.ProgressView_text_color) {
                 int color = typedArray.getColor(attr, this.textColor);
                 this.textColor = color;
+            }else if(attr == R.styleable.ProgressView_text){
+                String text = typedArray.getString(attr);
+                this.textContent = text;
+            }else if(attr == R.styleable.ProgressView_text_size){
+                float textSize = typedArray.getDimension(attr, this.textSize);
+                this.textSize = textSize;
             }
         }
         typedArray.recycle();
@@ -69,12 +76,15 @@ public class ProgressView extends RelativeLayout {
         viewBackground = view.findViewById(R.id.view_background);
         progressBar = view.findViewById(R.id.progress_horizontal);
         viewProgressColor = view.findViewById(R.id.view_progress_color);
+        relativeLayout = view.findViewById(R.id.relative_layout);
         textView = view.findViewById(R.id.text);
         GradientDrawable gradientDrawable1 = (GradientDrawable) viewBackground.getBackground();
         gradientDrawable1.setColor(bgColor);
         gradientDrawable1.setCornerRadius(radius);
         progressBar.setMax(this.maxProgress);
         textView.setTextColor(textColor);
+        textView.setText(textContent);
+        textView.setTextSize(textSize);
         setProgressDrawable();
         progressBar.setProgress(this.currentProgress);
         view.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +95,42 @@ public class ProgressView extends RelativeLayout {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        //view根据xml中layout_width和layout_height测量出对应的宽度和高度值，
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        switch (widthSpecMode){
+            case MeasureSpec.UNSPECIFIED:
+                isInit = false;
+                break;
+            case MeasureSpec.AT_MOST://wrap_content时候
+                isInit = true;
+                break;
+            case MeasureSpec.EXACTLY:
+                isInit = false;
+                break;
+        }
+
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        if(isInit){
+            RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
+            layoutParams.width = textView.getWidth();
+            layoutParams.height = textView.getHeight();
+            relativeLayout.setLayoutParams(layoutParams);
+        }else {
+            RelativeLayout.LayoutParams layoutParams = (LayoutParams) textView.getLayoutParams();
+            layoutParams.height = getHeight();
+            layoutParams.width = getWidth();
+            textView.setLayoutParams(layoutParams);
+        }
     }
 
     private void setProgressDrawable() {
