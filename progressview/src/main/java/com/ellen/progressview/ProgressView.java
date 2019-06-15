@@ -28,7 +28,8 @@ public class ProgressView extends RelativeLayout {
     private String textContent;
     private float textSize = 10f;
     private RelativeLayout relativeLayout;
-    private boolean isInit = false;
+    private boolean isWidthWrap = false;
+    private boolean isHeightWrap = false;
 
     public ProgressView(Context context) {
         super(context);
@@ -102,16 +103,27 @@ public class ProgressView extends RelativeLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //view根据xml中layout_width和layout_height测量出对应的宽度和高度值，
         int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
         switch (widthSpecMode){
             case MeasureSpec.UNSPECIFIED:
-                isInit = false;
+                isWidthWrap = false;
                 break;
             case MeasureSpec.AT_MOST://wrap_content时候
-                isInit = true;
+                isWidthWrap = true;
                 break;
             case MeasureSpec.EXACTLY:
-                isInit = false;
+                isWidthWrap = false;
+                break;
+        }
+        switch (heightSpecMode){
+            case MeasureSpec.UNSPECIFIED:
+                isHeightWrap = false;
+                break;
+            case MeasureSpec.AT_MOST://wrap_content时候
+                isHeightWrap = true;
+                break;
+            case MeasureSpec.EXACTLY:
+                isHeightWrap = false;
                 break;
         }
 
@@ -120,17 +132,36 @@ public class ProgressView extends RelativeLayout {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        if(isInit){
+        if(isWidthWrap && isHeightWrap){
             RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
             layoutParams.width = textView.getWidth();
             layoutParams.height = textView.getHeight();
             relativeLayout.setLayoutParams(layoutParams);
+        }else if(isWidthWrap){
+            RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
+            layoutParams.width = textView.getWidth();
+            relativeLayout.setLayoutParams(layoutParams);
+
+            RelativeLayout.LayoutParams layoutParams1 = (LayoutParams) textView.getLayoutParams();
+            layoutParams1.height = getHeight();
+            textView.setLayoutParams(layoutParams1);
+        }else if(isHeightWrap){
+            RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
+            layoutParams.height = textView.getHeight();
+            relativeLayout.setLayoutParams(layoutParams);
+
+            RelativeLayout.LayoutParams layoutParams1 = (LayoutParams) textView.getLayoutParams();
+            layoutParams1.width = getWidth();
+            textView.setLayoutParams(layoutParams1);
         }else {
             RelativeLayout.LayoutParams layoutParams = (LayoutParams) textView.getLayoutParams();
             layoutParams.height = getHeight();
             layoutParams.width = getWidth();
             textView.setLayoutParams(layoutParams);
         }
+
+        isHeightWrap = false;
+        isWidthWrap = false;
     }
 
     private void setProgressDrawable() {
