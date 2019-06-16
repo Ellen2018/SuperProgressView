@@ -15,9 +15,11 @@
         app:maxProgress="100"
         app:progress="90"
         app:text_color="#ffffff"
+        android:layout_margin="10dp"
         app:progress_color="#D02090"
-        app:text="可以"
-        app:text_size="8sp"
+        app:text="更新数据"
+        app:text_size="12sp"
+        app:text_padding="10dp"
         app:bg_color="@color/colorGray" />
 
     <TextView

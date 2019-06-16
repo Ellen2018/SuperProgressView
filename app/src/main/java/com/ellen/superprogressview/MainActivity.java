@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         progressView = findViewById(R.id.button_progress_green);
-        progressView.setText("0");
+        progressView.setText("更新数据");
         progressView.setOnClickListener(new ProgressView.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 p = p + 10;
                progressView.setCurrentProgress(p);
-               progressView.setText(progressView.getCurrentProgress()+"\n"+"dsadasd");
+               //progressView.setText(progressView.getCurrentProgress()+"\n"+"dsadasd");
             }
         });
 

@@ -9,6 +9,7 @@
     <attr name="text_color" format="color"/>
     <attr name="text" format="string"/>
     <attr name="text_size" format="dimension"/>
+    <attr name="text_padding" format="dimension"/>
     <declare-styleable name="ProgressView">
         <attr name="bg_color" />
         <attr name="radius" />
@@ -18,5 +19,6 @@
         <attr name="text_color"/>
         <attr name="text"/>
         <attr name="text_size"/>
+        <attr name="text_padding"/>
     </declare-styleable>
 </resources>

@@ -34,7 +34,7 @@ public class ProgressView extends RelativeLayout {
     private RelativeLayout relativeLayout;
     private Boolean isWidthWrap = null;
     private Boolean isHeightWrap = null;
-    private float finalWidth = 0;
+    private int textViewPadding;
 
     public ProgressView(Context context) {
         super(context);
@@ -71,6 +71,10 @@ public class ProgressView extends RelativeLayout {
             }else if(attr == R.styleable.ProgressView_text_size){
                 float textSize = typedArray.getDimension(attr, this.textSize);
                 this.textSize = textSize;
+                Log.e("字体大小",textSize+"");
+            }else if(attr == R.styleable.ProgressView_text_padding){
+                float padding = typedArray.getDimension(attr,this.textViewPadding);
+                this.textViewPadding = (int) padding;
             }
         }
         typedArray.recycle();
@@ -90,6 +94,7 @@ public class ProgressView extends RelativeLayout {
         progressBar.setMax(this.maxProgress);
         textView.setTextColor(textColor);
         textView.setTextSize(textSize);
+        textView.setPadding(textViewPadding,textViewPadding,textViewPadding,textViewPadding);
         setProgressDrawable();
         progressBar.setProgress(this.currentProgress);
         relativeLayout.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener());
