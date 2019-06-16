@@ -7,7 +7,6 @@ import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,7 +70,6 @@ public class ProgressView extends RelativeLayout {
             }else if(attr == R.styleable.ProgressView_text_size){
                 float textSize = typedArray.getDimension(attr, this.textSize);
                 this.textSize = textSize;
-                Log.e("字体大小",textSize+"");
             }else if(attr == R.styleable.ProgressView_text_padding){
                 float padding = typedArray.getDimension(attr,this.textViewPadding);
                 this.textViewPadding = (int) padding;
@@ -141,9 +139,6 @@ public class ProgressView extends RelativeLayout {
                     break;
             }
         }
-
-        Log.e("测量模式:",isWidthWrap+":"+isHeightWrap);
-
     }
 
     public float getTextWidth(){
@@ -213,8 +208,6 @@ public class ProgressView extends RelativeLayout {
     private class OnGlobalLayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
         @Override
         public void onGlobalLayout() {
-            Log.e("宽度模式->",isWidthWrap+"");
-            Log.e("高度模式->",isHeightWrap+"");
             if(isWidthWrap && isHeightWrap){
                 relativeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
