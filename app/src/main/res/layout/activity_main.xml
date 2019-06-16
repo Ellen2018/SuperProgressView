@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
-    android:layout_height="?actionBarSize"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <com.ellen.progressview.ProgressView
@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:radius="90dp"
+        app:radius="45dp"
         app:maxProgress="100"
         app:progress="90"
         app:text_color="#ffffff"
@@ -20,12 +20,13 @@
         app:text_size="8sp"
         app:bg_color="@color/colorGray" />
 
-    <Button
+    <TextView
         android:id="@+id/bt_add"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_alignParentBottom="true"
         android:text="添加10"
         android:gravity="center"
-        android:layout_height="wrap_content" />
+        android:background="@drawable/test_bg"
+        android:layout_height="100dp" />
 
 </RelativeLayout>

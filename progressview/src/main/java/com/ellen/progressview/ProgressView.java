@@ -32,8 +32,8 @@ public class ProgressView extends RelativeLayout {
     private String textContent = "";
     private float textSize = 10f;
     private RelativeLayout relativeLayout;
-    private Boolean isWidthWrap = false;
-    private Boolean isHeightWrap = false;
+    private Boolean isWidthWrap = null;
+    private Boolean isHeightWrap = null;
     private float finalWidth = 0;
 
     public ProgressView(Context context) {
@@ -92,6 +92,7 @@ public class ProgressView extends RelativeLayout {
         textView.setTextSize(textSize);
         setProgressDrawable();
         progressBar.setProgress(this.currentProgress);
+        relativeLayout.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener());
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,28 +109,35 @@ public class ProgressView extends RelativeLayout {
         //view根据xml中layout_width和layout_height测量出对应的宽度和高度值，
         int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
-        switch (widthSpecMode){
-            case MeasureSpec.UNSPECIFIED:
-                isWidthWrap = false;
-                break;
-            case MeasureSpec.AT_MOST://wrap_content时候
-                isWidthWrap = true;
-                break;
-            case MeasureSpec.EXACTLY:
-                isWidthWrap = false;
-                break;
+        if(isWidthWrap == null) {
+            switch (widthSpecMode) {
+                case MeasureSpec.UNSPECIFIED:
+                    isWidthWrap = false;
+                    break;
+                case MeasureSpec.AT_MOST://wrap_content时候
+                    isWidthWrap = true;
+                    break;
+                case MeasureSpec.EXACTLY:
+                    isWidthWrap = false;
+                    break;
+            }
         }
-        switch (heightSpecMode){
-            case MeasureSpec.UNSPECIFIED:
-                isHeightWrap = false;
-                break;
-            case MeasureSpec.AT_MOST://wrap_content时候
-                isHeightWrap = true;
-                break;
-            case MeasureSpec.EXACTLY:
-                isHeightWrap = false;
-                break;
+        if(isHeightWrap == null) {
+            switch (heightSpecMode) {
+                case MeasureSpec.UNSPECIFIED:
+                    isHeightWrap = false;
+                    break;
+                case MeasureSpec.AT_MOST://wrap_content时候
+                    isHeightWrap = true;
+                    break;
+                case MeasureSpec.EXACTLY:
+                    isHeightWrap = false;
+                    break;
+            }
         }
+
+        Log.e("测量模式:",isWidthWrap+":"+isHeightWrap);
+
     }
 
     public float getTextWidth(){
@@ -190,7 +198,53 @@ public class ProgressView extends RelativeLayout {
 
     public void setText(String text){
         this.textContent = text;
+        textView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener());
+        isHeightWrap = null;
+        isWidthWrap = null;
         textView.setText(text);
+    }
+
+    private class OnGlobalLayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
+        @Override
+        public void onGlobalLayout() {
+            Log.e("宽度模式->",isWidthWrap+"");
+            Log.e("高度模式->",isHeightWrap+"");
+            if(isWidthWrap && isHeightWrap){
+                relativeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
+                layoutParams.width =textView.getWidth();
+                layoutParams.height = textView.getHeight();
+                relativeLayout.setLayoutParams(layoutParams);
+            }
+            if(isHeightWrap && !isWidthWrap){
+                relativeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
+                layoutParams.height =textView.getHeight();
+
+
+                RelativeLayout.LayoutParams layoutParams1 = (LayoutParams) textView.getLayoutParams();
+                layoutParams1.width = relativeLayout.getWidth();
+                textView.setLayoutParams(layoutParams);
+            }
+            if(isWidthWrap && !isHeightWrap){
+                relativeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                RelativeLayout.LayoutParams layoutParams = (LayoutParams) textView.getLayoutParams();
+                layoutParams.width = relativeLayout.getWidth();
+                textView.setLayoutParams(layoutParams);
+
+
+                RelativeLayout.LayoutParams layoutParams1 = (LayoutParams) textView.getLayoutParams();
+                layoutParams1.height = relativeLayout.getHeight();
+                textView.setLayoutParams(layoutParams);
+            }
+            if(!isWidthWrap && !isHeightWrap){
+                relativeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                RelativeLayout.LayoutParams layoutParams = (LayoutParams) textView.getLayoutParams();
+                layoutParams.width = relativeLayout.getWidth();
+                layoutParams.height = relativeLayout.getHeight();
+                textView.setLayoutParams(layoutParams);
+            }
+        }
     }
 
     public int getCurrentProgress(){return currentProgress;}
