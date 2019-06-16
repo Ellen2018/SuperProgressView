@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 p = p + 10;
                progressView.setCurrentProgress(p);
-               progressView.setText(progressView.getCurrentProgress()+"");
+               progressView.setText(progressView.getCurrentProgress()+"\n"+"dsadasd");
             }
         });
 

@@ -248,4 +248,8 @@ public class ProgressView extends RelativeLayout {
     }
 
     public int getCurrentProgress(){return currentProgress;}
+
+    public TextView getTextView(){
+        return textView;
+    }
 }
