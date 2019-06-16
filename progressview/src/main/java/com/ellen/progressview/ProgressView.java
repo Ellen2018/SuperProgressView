@@ -2,12 +2,16 @@ package com.ellen.progressview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Rect;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,11 +29,12 @@ public class ProgressView extends RelativeLayout {
     private int currentProgress = 70;
     private int textColor = 0xffffff;
     private OnClickListener onClickListener;
-    private String textContent;
+    private String textContent = "";
     private float textSize = 10f;
     private RelativeLayout relativeLayout;
-    private boolean isWidthWrap = false;
-    private boolean isHeightWrap = false;
+    private Boolean isWidthWrap = false;
+    private Boolean isHeightWrap = false;
+    private float finalWidth = 0;
 
     public ProgressView(Context context) {
         super(context);
@@ -73,7 +78,7 @@ public class ProgressView extends RelativeLayout {
     }
 
     private void initView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.progress_layout, this);
+        final View view = LayoutInflater.from(getContext()).inflate(R.layout.progress_layout, this);
         viewBackground = view.findViewById(R.id.view_background);
         progressBar = view.findViewById(R.id.progress_horizontal);
         viewProgressColor = view.findViewById(R.id.view_progress_color);
@@ -84,7 +89,6 @@ public class ProgressView extends RelativeLayout {
         gradientDrawable1.setCornerRadius(radius);
         progressBar.setMax(this.maxProgress);
         textView.setTextColor(textColor);
-        textView.setText(textContent);
         textView.setTextSize(textSize);
         setProgressDrawable();
         progressBar.setProgress(this.currentProgress);
@@ -126,42 +130,29 @@ public class ProgressView extends RelativeLayout {
                 isHeightWrap = false;
                 break;
         }
+    }
 
+    public float getTextWidth(){
+        TextPaint paint = new TextPaint();
+        float scaledDensity = getContext().getResources().getDisplayMetrics().scaledDensity;
+        paint.setTextSize(scaledDensity * textSize);
+        return paint.measureText(textContent);
+    }
+
+    public float getTextHeight (){
+        TextPaint paint = new TextPaint();
+        float scaledDensity = getContext().getResources().getDisplayMetrics().scaledDensity;
+        paint.setTextSize(scaledDensity * textSize);
+        Rect rect = new Rect();
+        paint.measureText(textContent);
+        paint.getTextBounds(textContent, 0, textContent.length(), rect);
+        int h = rect.height();
+        return h;
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        if(isWidthWrap && isHeightWrap){
-            RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
-            layoutParams.width = textView.getWidth();
-            layoutParams.height = textView.getHeight();
-            relativeLayout.setLayoutParams(layoutParams);
-        }else if(isWidthWrap){
-            RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
-            layoutParams.width = textView.getWidth();
-            relativeLayout.setLayoutParams(layoutParams);
-
-            RelativeLayout.LayoutParams layoutParams1 = (LayoutParams) textView.getLayoutParams();
-            layoutParams1.height = getHeight();
-            textView.setLayoutParams(layoutParams1);
-        }else if(isHeightWrap){
-            RelativeLayout.LayoutParams layoutParams = (LayoutParams) relativeLayout.getLayoutParams();
-            layoutParams.height = textView.getHeight();
-            relativeLayout.setLayoutParams(layoutParams);
-
-            RelativeLayout.LayoutParams layoutParams1 = (LayoutParams) textView.getLayoutParams();
-            layoutParams1.width = getWidth();
-            textView.setLayoutParams(layoutParams1);
-        }else {
-            RelativeLayout.LayoutParams layoutParams = (LayoutParams) textView.getLayoutParams();
-            layoutParams.height = getHeight();
-            layoutParams.width = getWidth();
-            textView.setLayoutParams(layoutParams);
-        }
-
-        isHeightWrap = false;
-        isWidthWrap = false;
     }
 
     private void setProgressDrawable() {
