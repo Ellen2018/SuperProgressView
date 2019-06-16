@@ -94,6 +94,7 @@ public class ProgressView extends RelativeLayout {
         progressBar.setMax(this.maxProgress);
         textView.setTextColor(textColor);
         textView.setTextSize(textSize);
+        textView.setText(textContent);
         textView.setPadding(textViewPadding,textViewPadding,textViewPadding,textViewPadding);
         setProgressDrawable();
         progressBar.setProgress(this.currentProgress);

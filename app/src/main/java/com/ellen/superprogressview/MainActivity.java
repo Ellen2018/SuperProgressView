@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 p = p + 10;
+                if(p>100)
+                    p = 10;
                progressView.setCurrentProgress(p);
                //progressView.setText(progressView.getCurrentProgress()+"\n"+"dsadasd");
             }

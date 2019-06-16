@@ -8,17 +8,17 @@
 
     <com.ellen.progressview.ProgressView
         android:id="@+id/button_progress_green"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="4dp"
         app:radius="45dp"
         app:maxProgress="100"
         app:progress="90"
         app:text_color="#ffffff"
-        android:layout_margin="10dp"
-        app:progress_color="#D02090"
+        app:progress_color="#3f3f3f"
         app:text="更新数据"
-        app:text_size="12sp"
+        app:text_size="8dp"
         app:text_padding="10dp"
         app:bg_color="@color/colorGray" />
 
