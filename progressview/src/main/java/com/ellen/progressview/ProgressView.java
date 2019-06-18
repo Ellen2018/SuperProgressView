@@ -239,9 +239,13 @@ public class ProgressView extends RelativeLayout {
             if(!isWidthWrap && !isHeightWrap){
                 relativeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 RelativeLayout.LayoutParams layoutParams = (LayoutParams) textView.getLayoutParams();
-                layoutParams.width = relativeLayout.getWidth();
-                layoutParams.height = relativeLayout.getHeight();
+                layoutParams.width = ProgressView.this.getWidth();
+                layoutParams.height = ProgressView.this.getHeight();
                 textView.setLayoutParams(layoutParams);
+                RelativeLayout.LayoutParams layoutParams1 = (LayoutParams) relativeLayout.getLayoutParams();
+                layoutParams1.width = ProgressView.this.getWidth();
+                layoutParams1.height = ProgressView.this.getHeight();
+                relativeLayout.setLayoutParams(layoutParams1);
             }
         }
     }

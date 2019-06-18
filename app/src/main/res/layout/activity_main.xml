@@ -28,6 +28,7 @@
         android:layout_alignParentBottom="true"
         android:text="添加10"
         android:gravity="center"
+        android:visibility="gone"
         android:background="@drawable/test_bg"
         android:layout_height="100dp" />
 
