@@ -123,7 +123,6 @@ public class ProgressView extends RelativeLayout {
                 isWidthWrap = true;
             }else {
                 isWidthWrap = false;
-                Log.e("布局宽度",layoutParams.width+"");
             }
         }
 
@@ -131,11 +130,10 @@ public class ProgressView extends RelativeLayout {
             ViewGroup.LayoutParams layoutParams = this.getLayoutParams();
             if(layoutParams.height == ViewGroup.LayoutParams.MATCH_PARENT){
                 isHeightWrap = false;
-            }else if(layoutParams.width == ViewGroup.LayoutParams.WRAP_CONTENT){
+            }else if(layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT){
                 isHeightWrap = true;
             }else {
                 isHeightWrap = false;
-                Log.e("布局高度",layoutParams.height+"");
             }
         }
 
@@ -148,7 +146,7 @@ public class ProgressView extends RelativeLayout {
                 break;
         }
 
-        switch (heightMeasureSpec){
+        switch (heightSpecMode){
             case MeasureSpec.UNSPECIFIED:
                 break;
             case MeasureSpec.AT_MOST:

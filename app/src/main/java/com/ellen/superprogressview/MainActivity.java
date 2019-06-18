@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        progressView = findViewById(R.id.button_progress_green);
+        progressView = findViewById(R.id.upload_data);
         progressView.setText("更新数据");
         progressView.setOnClickListener(new ProgressView.OnClickListener() {
             @Override

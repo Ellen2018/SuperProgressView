@@ -7,20 +7,18 @@
     tools:context=".MainActivity">
 
     <com.ellen.progressview.ProgressView
-        android:id="@+id/button_progress_green"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:id="@+id/upload_data"
+        android:layout_width="200dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="4dp"
-        app:radius="45dp"
+        android:layout_height="55dp"
+        app:radius="0dp"
         app:maxProgress="100"
-        app:progress="90"
-        app:text_color="#ffffff"
-        app:progress_color="#3f3f3f"
-        app:text="更新数据"
-        app:text_size="8dp"
-        app:text_padding="10dp"
-        app:bg_color="@color/colorGray" />
+        app:progress="80"
+        app:bg_color="@color/colorGreen"
+        app:progress_color="#882d2d2d"
+        app:text="上传数据"
+        app:text_size="8sp"
+        app:text_color="#ffffff" />
 
     <TextView
         android:id="@+id/bt_add"
