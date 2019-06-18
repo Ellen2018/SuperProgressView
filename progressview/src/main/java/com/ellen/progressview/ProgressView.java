@@ -114,8 +114,6 @@ public class ProgressView extends RelativeLayout {
         //view根据xml中layout_width和layout_height测量出对应的宽度和高度值，
         int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
-        Log.e("测量宽度",textView.getMeasuredWidth()+"");
-        Log.e("测量高度",textView.getMeasuredHeight()+"");
         if(isWidthWrap == null){
             ViewGroup.LayoutParams layoutParams = this.getLayoutParams();
             if(layoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT){
