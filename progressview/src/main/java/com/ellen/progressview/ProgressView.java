@@ -7,9 +7,11 @@ import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -113,31 +115,46 @@ public class ProgressView extends RelativeLayout {
         //view根据xml中layout_width和layout_height测量出对应的宽度和高度值，
         int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
-        if(isWidthWrap == null) {
-            switch (widthSpecMode) {
-                case MeasureSpec.UNSPECIFIED:
-                    isWidthWrap = false;
-                    break;
-                case MeasureSpec.AT_MOST://wrap_content时候
-                    isWidthWrap = true;
-                    break;
-                case MeasureSpec.EXACTLY:
-                    isWidthWrap = false;
-                    break;
+        if(isWidthWrap == null){
+            ViewGroup.LayoutParams layoutParams = this.getLayoutParams();
+            if(layoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT){
+                isWidthWrap = false;
+            }else if(layoutParams.width == ViewGroup.LayoutParams.WRAP_CONTENT){
+                isWidthWrap = true;
+            }else {
+                isWidthWrap = false;
+                Log.e("布局宽度",layoutParams.width+"");
             }
         }
-        if(isHeightWrap == null) {
-            switch (heightSpecMode) {
-                case MeasureSpec.UNSPECIFIED:
-                    isHeightWrap = false;
-                    break;
-                case MeasureSpec.AT_MOST://wrap_content时候
-                    isHeightWrap = true;
-                    break;
-                case MeasureSpec.EXACTLY:
-                    isHeightWrap = false;
-                    break;
+
+        if(isHeightWrap == null){
+            ViewGroup.LayoutParams layoutParams = this.getLayoutParams();
+            if(layoutParams.height == ViewGroup.LayoutParams.MATCH_PARENT){
+                isHeightWrap = false;
+            }else if(layoutParams.width == ViewGroup.LayoutParams.WRAP_CONTENT){
+                isHeightWrap = true;
+            }else {
+                isHeightWrap = false;
+                Log.e("布局高度",layoutParams.height+"");
             }
+        }
+
+        switch (widthSpecMode){
+            case MeasureSpec.UNSPECIFIED:
+                break;
+            case MeasureSpec.AT_MOST:
+                break;
+            case MeasureSpec.EXACTLY:
+                break;
+        }
+
+        switch (heightMeasureSpec){
+            case MeasureSpec.UNSPECIFIED:
+                break;
+            case MeasureSpec.AT_MOST:
+                break;
+            case MeasureSpec.EXACTLY:
+                break;
         }
     }
 
