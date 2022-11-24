@@ -146,18 +146,14 @@ public class ProgressView extends RelativeLayout {
         //没有进行父宽高适配，padding适配
         switch (widthSpecMode){
             case MeasureSpec.UNSPECIFIED:
-                break;
             case MeasureSpec.AT_MOST:
-                break;
             case MeasureSpec.EXACTLY:
                 break;
         }
 
         switch (heightSpecMode){
             case MeasureSpec.UNSPECIFIED:
-                break;
             case MeasureSpec.AT_MOST:
-                break;
             case MeasureSpec.EXACTLY:
                 break;
         }

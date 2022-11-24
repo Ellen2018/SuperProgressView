@@ -1,6 +1,5 @@
 package com.ellen.superprogressview;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
    private ProgressView progressView;
    private int p = 0;
-   private Handler mainHandler = new Handler(Looper.getMainLooper());
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
