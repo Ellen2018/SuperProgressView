@@ -9,24 +9,25 @@
     <com.ellen.progressview.ProgressView
         android:id="@+id/upload_data"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_alignParentBottom="true"
         android:layout_height="55dp"
-        app:radius="0dp"
+        app:radius="45dp"
         app:maxProgress="100"
         app:progress="80"
-        app:bg_color="@color/colorGray"
+        app:bg_color="#80000000"
         app:progress_color="#882d2d2d"
         app:text="上传数据"
         app:text_size="8sp"
         app:text_color="#ffffff" />
 
-    <TextView
+    <Button
         android:id="@+id/bt_add"
         android:layout_width="200dp"
-        android:layout_alignParentBottom="true"
         android:text="添加10"
+        android:layout_centerInParent="true"
         android:gravity="center"
-        android:visibility="gone"
         android:background="@drawable/test_bg"
         android:layout_height="100dp" />
 

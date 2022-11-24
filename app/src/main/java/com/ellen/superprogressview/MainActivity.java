@@ -1,7 +1,10 @@
 package com.ellen.superprogressview;
 
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.ellen.progressview.ProgressView;
@@ -10,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
    private ProgressView progressView;
    private int p = 0;
+   private Handler mainHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +33,27 @@ public class MainActivity extends AppCompatActivity {
                 if(p>100)
                     p = 10;
                progressView.setCurrentProgress(p);
-               //progressView.setText(progressView.getCurrentProgress()+"\n"+"dsadasd");
+               progressView.setText("当前进度："+p);
             }
         });
-
+        mainHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                p+=10;
+                if(p>100){
+                    p = 10;
+                }
+                if(p == 10){
+                    progressView.setBgColor(Color.RED);
+                    progressView.setProgressColor(Color.BLACK);
+                }else if(p == 20){
+                    progressView.setBgColor(Color.BLUE);
+                    progressView.setProgressColor(Color.RED);
+                }
+                progressView.setCurrentProgress(p);
+                progressView.setText("当前进度："+p);
+                mainHandler.postDelayed(this,1000);
+            }
+        },1000);
     }
 }

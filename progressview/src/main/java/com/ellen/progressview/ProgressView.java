@@ -32,7 +32,6 @@ public class ProgressView extends RelativeLayout {
     private OnClickListener onClickListener;
     private String textContent = "";
     private float textSize = 10f;
-    private RelativeLayout relativeLayout;
     private Boolean isWidthWrap = null;
     private Boolean isHeightWrap = null;
     private int textViewPadding;
@@ -86,7 +85,7 @@ public class ProgressView extends RelativeLayout {
         viewBackground = view.findViewById(R.id.view_background);
         progressBar = view.findViewById(R.id.progress_horizontal);
         viewProgressColor = view.findViewById(R.id.view_progress_color);
-        relativeLayout = view.findViewById(R.id.relative_layout);
+        RelativeLayout relativeLayout = view.findViewById(R.id.relative_layout);
         textView = view.findViewById(R.id.text);
         GradientDrawable gradientDrawable1 = (GradientDrawable) viewBackground.getBackground();
         gradientDrawable1.setColor(bgColor);
@@ -106,6 +105,12 @@ public class ProgressView extends RelativeLayout {
                 }
             }
         });
+    }
+
+    public void setBgColor(int bgColor){
+        this.bgColor = bgColor;
+        GradientDrawable gradientDrawable1 = (GradientDrawable) viewBackground.getBackground();
+        gradientDrawable1.setColor(bgColor);
     }
 
     @Override
@@ -202,7 +207,7 @@ public class ProgressView extends RelativeLayout {
     }
 
     public void setCurrentProgress(int currentProgress) {
-        this.currentProgress = currentProgress > maxProgress ? maxProgress : currentProgress;
+        this.currentProgress = Math.min(currentProgress, maxProgress);
         progressBar.setProgress(currentProgress);
     }
 
