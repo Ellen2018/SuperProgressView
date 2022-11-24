@@ -35,6 +35,7 @@ public class ProgressView extends RelativeLayout {
     private Boolean isWidthWrap = null;
     private Boolean isHeightWrap = null;
     private int textViewPadding;
+    private int direction = 1;
 
     public ProgressView(Context context) {
         super(context);
@@ -74,6 +75,8 @@ public class ProgressView extends RelativeLayout {
             }else if(attr == R.styleable.ProgressView_text_padding){
                 float padding = typedArray.getDimension(attr,this.textViewPadding);
                 this.textViewPadding = (int) padding;
+            }else if(attr == R.styleable.ProgressView_progress_direction){
+                direction = typedArray.getInt(attr, 0);
             }
         }
         typedArray.recycle();
@@ -85,7 +88,6 @@ public class ProgressView extends RelativeLayout {
         viewBackground = view.findViewById(R.id.view_background);
         progressBar = view.findViewById(R.id.progress_horizontal);
         viewProgressColor = view.findViewById(R.id.view_progress_color);
-        RelativeLayout relativeLayout = view.findViewById(R.id.relative_layout);
         textView = view.findViewById(R.id.text);
         GradientDrawable gradientDrawable1 = (GradientDrawable) viewBackground.getBackground();
         gradientDrawable1.setColor(bgColor);
@@ -201,7 +203,20 @@ public class ProgressView extends RelativeLayout {
         GradientDrawable gradientDrawable1 = (GradientDrawable) viewProgressColor.getBackground();
         gradientDrawable1.setColor(progressColor);
         gradientDrawable1.setCornerRadius(radius);
-        ClipDrawable clipDrawable = new ClipDrawable(gradientDrawable1, Gravity.LEFT,ClipDrawable.HORIZONTAL);
+        int d = Gravity.LEFT;
+        int v = ClipDrawable.HORIZONTAL;
+        if(direction == 1){
+            d = Gravity.LEFT;
+        }else if(direction == 2){
+            d = Gravity.TOP;
+            v = ClipDrawable.VERTICAL;
+        }else if(direction == 3){
+            d = Gravity.RIGHT;
+        }else{
+            d = Gravity.BOTTOM;
+            v = ClipDrawable.VERTICAL;
+        }
+        ClipDrawable clipDrawable = new ClipDrawable(gradientDrawable1, d,v);
         progressBar.setProgressDrawable(clipDrawable);
         progressBar.setProgress(currentProgress);
     }

@@ -10,6 +10,12 @@
     <attr name="text" format="string"/>
     <attr name="text_size" format="dimension"/>
     <attr name="text_padding" format="dimension"/>
+    <attr name="progress_direction">
+        <enum name="left" value="1" />
+        <enum name="top" value="2" />
+        <enum name="right" value="3" />
+        <enum name="bottom" value="4" />
+    </attr>
     <declare-styleable name="ProgressView">
         <attr name="bg_color" />
         <attr name="radius" />
@@ -20,5 +26,6 @@
         <attr name="text"/>
         <attr name="text_size"/>
         <attr name="text_padding"/>
+        <attr name="progress_direction"/>
     </declare-styleable>
 </resources>
